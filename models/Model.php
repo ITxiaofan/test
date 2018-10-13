@@ -1,5 +1,6 @@
 <?php
 namespace models;
+use PDO;
 class Model{
     protected $_db;
     // 操作的表名

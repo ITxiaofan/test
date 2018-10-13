@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <title>后台管理</title>
-    <link rel="stylesheet" type="text/css" href="/Styles/common.css" />
+    <link rel="stylesheet" type="text/css" href="/Styles/common1.css" />
     <link rel="stylesheet" type="text/css" href="/Styles/main.css" />
 </head>
 
@@ -37,7 +37,7 @@
                     <li>
                         <a href="#"><i class="icon-font">&#xe003;</i>常用操作</a>
                         <ul class="sub-menu">
-                            <li><a href="design.html"><i class="icon-font">&#xe008;</i>作品管理</a></li>
+                            <li><a href="/Index/design"><i class="icon-font">&#xe008;</i>作品管理</a></li>
 
                         </ul>
                     </li>
@@ -86,7 +86,7 @@
                 <form name="myform" id="myform" method="post">
                     <div class="result-title">
                         <div class="result-list">
-                            <a href="Index/"><i class="icon-font"></i>新增作品</a>
+                            <a href="/Index/"><i class="icon-font"></i>新增作品</a>
                             <a id="batchDel" href="javascript:void(0)"><i class="icon-font"></i>批量删除</a>
                             <a id="updateOrd" href="javascript:void(0)"><i class="icon-font"></i>更新排序</a>
                         </div>
@@ -204,13 +204,13 @@
                         </table>
                         <!-- <?=$page_str?> -->
                         <table id="page-table" cellspacing="0">
-                                <tr>
-                                    <td width="80%">&nbsp;</td>
-                                    <td align="center" nowrap="true">
-                                        <?=$page?>
-                                    </td>
-                                </tr>
-                            </table>
+                            <tr>
+                                <td width="80%">&nbsp;</td>
+                                <td align="center" nowrap="true">
+                                    <?=$page?>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
                 </form>
             </div>

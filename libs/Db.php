@@ -1,44 +1,76 @@
 <?php
 namespace libs;
-
+use pdo;
 class Db
 {
-    private static $_obj = null;
-    private function __clone(){}
+        static $pdo = null;
+        static $Db = null;
+        function __construct(){
+            $config = config('db');
 
-    private $_pdo;
-    private function __construct(){
-        // 连接数据库
-        $this->_pdo = new \PDO('mysql:host=127.0.0.1;dbname=product', 'root', '123456');
-        // 设置编码
-        $this->_pdo->exec('SET NAMES utf8');
-    }
+            if($pdo==null){
 
-    // 返回唯一的对象
-    public static function make()
-    {
-        if(self::$_obj === null)
-        {
-            self::$_obj = new self;
+                self::$pdo = new PDO("mysql:host={$config['host']};dbname={$config['dbname']}",$config['user'],$config['pass']);
+                self::$pdo->exec("set names utf-8");
+            }
         }
-        return self::$_obj;
-    }
+        static function make(){
 
-    // 预处理
-    public function prepare($sql)
-    {   
-        return $this->_pdo->prepare($sql);        
-    }
+            if(self::$Db==null){    
+                self::$Db = new Db;
+            }
 
-    // 非预处理执行SQL
-    public function exec($sql)
-    {
-        return $this->_pdo->exec($sql);
-    }
+            return self::$Db;
 
-    // 获取最新添加的记录的ID
-    public function lastInsertId()
-    {
-        return $this->_pdo->lastInsertId();
-    }
+        }
+
+        function prepare($sql){
+            $psm = self::$pdo->prepare($sql);
+            return $psm;
+
+        }
+
+        function exec($sql){
+            $data = self::$pdo->exec($sql);
+
+            if($data){
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        function query($sql){
+
+            $psm = self::$pdo->query($sql);
+            return $psm;
+        }
+
+        function delete($sql){
+
+            $data = self::$pdo->delete($sql);
+
+            if($data){
+                return true;
+
+            }else{
+                return false;
+            }
+        }
+
+        function update($sql){
+
+            $data = self::$pdo->update($sql);
+
+            if($data){
+                return true;
+
+            }else{
+                return false;
+
+            }
+        }
 }
+
+
+        

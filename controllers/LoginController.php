@@ -2,14 +2,17 @@
 namespace controllers;
 use models\User;
 class LoginController{
+
     public function dologin(){
+
         $username = $_POST['username'];
+
         $password = md5($_POST['password']);
 
         $user = new User;
         if($user->login($username,$password)){
             
-            die(view("users/index"));
+            die(view("Product/index"));
         }else{
             die("登录失败！");
         }
@@ -19,7 +22,7 @@ class LoginController{
         view("users/login");
     }
     public function doregister(){
-        
+
         view("users/login");
     }
     public function register(){

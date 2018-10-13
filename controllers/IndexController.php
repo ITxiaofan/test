@@ -14,17 +14,12 @@ class IndexController{
         view("/Product/design");
     }
     public function insert(){
+
         $model = new Index;
-        $stmt = $this->_db->prepare("SELECT * FROM list");
-        $stmt->execute();
-        $data = $stmt->fetchAll();
+        $data = $model->insert();
 
-        var_dump($stmt);
-        exit;
-        // $stmt = $this->_db->preppare('INSERT INTO list()')SELECT b.id FROM Category a LEFT JOIN list b ON b.id=a.cat_name
-        // $stmt = $model->findAll();
 
-        view("/Product/insert",$data);
+        view("/Product/insert");
     }
     public function edit(){
         $model = new Index;

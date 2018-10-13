@@ -1,15 +1,24 @@
 <?php
 namespace models;
-use PDO;
-class User extends Base{
+use PDO; 
+class User extends Model{
+    
     public function login($username,$password){
 
-        $stmt = $this->pdo->prepare("SELECT * FROM users WHERE username='?' AND password=?");
-        $stmt->execute([
-            $username,
-            $password => md5($password),
-        ]);
-        $data = $stmt->fetchAll();
+        $sql = "SELECT * FROM users WHERE username= ? AND password=?";
+        // var_dump($username,$password);
+
+        $pdo = \libs\Db::make();
+
+        $psm = $pdo->prepare($sql);
+
+        $psm->execute([$username,$password]);
+
+        $data = $psm->fetch(PDO::FETCH_ASSOC);
+
+        // var_dump($data);
+
+        // die();
         if($data){
             $_SESSION['useranme'] = $username;
             $_SESSION['password'] = $password;
@@ -21,7 +30,7 @@ class User extends Base{
     }
     public function getAll()
     {
-        $stmt = self::$pdo->query('SELECT * FROM users');
+        $stmt =$this->_db->query('SELECT * FROM users');
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }

@@ -1,8 +1,8 @@
 <?php
 namespace Models;
-class Login{
+class Login extends Base{
     protected $table = "users";
     protected $filltable = ['id','username'];
-    
+    // 
     
 }

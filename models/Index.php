@@ -5,23 +5,18 @@ class Index extends Model{
     protected $table = 'list';
     // 设置允许接收的字段
     protected $fillable = ['title','audit_status','publisher','update_at','comment'];
-    public function __construct(){
-        $this->_db = \libs\Db::make();
-    }
-    public function insert($id){
+    public function insert(){
+        $pdo = \libs\Db::make();
+        $psm = $pdo->prepare("SELECT * FROM list");
         
-        $stmt = $this->_db->prepare("INSERT INTO Category (id,cat_name) VALUES (?,'?')");
-        $stmt->execute([
-            $id,
-            $_GET['cat_name'],
-        ]);
-        $data = $stmt->fetchAll();
-
+        $psm->execute();
+        $data = $psm->fetchAll();
+        return $data;
     }
     public function delete(){
-        $stmt = $this->_db->prepare("DELETE FROM list WHERE id=?");
-            $stmt->execute([
-                $_GET['ID']
+        $psm = $pdo->prepare("DELETE FROM list WHERE id=?");
+            $psm->execute([
+                $_GET['id']
             ]);
     }
 

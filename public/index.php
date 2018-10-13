@@ -32,3 +32,11 @@ function redirect($url)
     header('Location:'.$url);
     exit;
 }
+
+function config($name){
+
+$config = require(ROOT."config.php");
+
+return $config[$name];
+
+}
